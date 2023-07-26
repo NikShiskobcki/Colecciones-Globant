@@ -1,4 +1,5 @@
 package Services;
+
 import Models.Alumno;
 
 import java.util.ArrayList;
@@ -9,32 +10,37 @@ public class AlumnosService {
     public static ArrayList<Alumno> listaAlumnos = new ArrayList();
 
 
-    public void crearAlumno(){
-        char x;
+    public void crearAlumno() {
+        char x='s';
+        ArrayList<Integer> notasList;
+        Alumno student;
 
         System.out.println("Desea agregar un alumno? (s/n)");
-        do {
+
+        while (x == 's') {
             x = rd.next().charAt(0);
-            if (x!='n'){
-                Alumno student = new Alumno();
-                int note;
-                System.out.println("Ingrese el nombre del alumno");
-                student.setNombre(rd.next().toLowerCase());
-                ArrayList<Integer> notasList= new ArrayList<>();
-                System.out.println("Ingrese la primera nota");
-                note = rd.nextInt();
-                notasList.add(note);
-                System.out.println("Ingrese la segunda nota");
-                notasList.add(rd.nextInt());
-                System.out.println("Ingrese la tercera nota");
-                notasList.add(rd.nextInt());
-                student.setNotas(notasList);
-                listaAlumnos.add(student);
-
-                System.out.println("Desea agregar otro alumno?");
+            if (x == 'n') {
+                break;
             }
+            notasList = new ArrayList<>();
+            student = new Alumno();
+            int note;
 
-        } while (x!='n');
+            System.out.println("Ingrese el nombre del alumno");
+            student.setNombre(rd.next().toLowerCase());
+            System.out.println("Ingrese la primera nota");
+            note = rd.nextInt();
+            notasList.add(note);
+            System.out.println("Ingrese la segunda nota");
+            notasList.add(rd.nextInt());
+            System.out.println("Ingrese la tercera nota");
+            notasList.add(rd.nextInt());
+            student.setNotas(notasList);
+            listaAlumnos.add(student);
+
+            System.out.println("Desea agregar otro alumno?");
+
+        }
 
     }
 
@@ -42,15 +48,15 @@ public class AlumnosService {
         return listaAlumnos;
     }
 
-    public double notaFinal(Alumno st){
+    public double notaFinal(Alumno st) {
         Alumno student = listaAlumnos.get(listaAlumnos.indexOf(st));
         ArrayList<Integer> studentNotes = st.getNotas();
-        double suma=0;
-        for (Integer x: studentNotes) {
-            suma += (double)x;
+        double suma = 0;
+        for (Integer x : studentNotes) {
+            suma += (double) x;
         }
 
-        double promedio = suma/3;
+        double promedio = suma / 3;
 
         return promedio;
     }
